@@ -25,3 +25,13 @@
     margin-top: 20px;
     width: 200px;
 }
+
+.label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.input {
+    margin-top: 5px;
+    width: 100px;
+}
