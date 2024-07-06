@@ -8,8 +8,8 @@ export default function Home() {
   return (
     <main>
       <h1>Adjust the Water Level</h1>
-      <SignInButton />
       <UserInfo />
+      <SignInButton />
       <Glass />
     </main>
   );

@@ -4,7 +4,7 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBnyN6sWv6Rdfxo-PlYGbpk26KUvwamZS4",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: "healthyapp-28b80.firebaseapp.com",
   projectId: "healthyapp-28b80",
   storageBucket: "healthyapp-28b80.appspot.com",
@@ -17,5 +17,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-
 export { auth, provider };
