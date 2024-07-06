@@ -8,10 +8,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <title>Glass of Water</title>
-        <meta
-          name="description"
-          content="Display a glass of water with adjustable water level"
-        />
+        <meta name="description" content="Display a glass of water with adjustable water level" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>{children}</body>
