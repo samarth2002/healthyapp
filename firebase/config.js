@@ -2,17 +2,15 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 
-
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_API_KEY,
-  authDomain: "healthyapp-28b80.firebaseapp.com",
-  projectId: "healthyapp-28b80",
-  storageBucket: "healthyapp-28b80.appspot.com",
-  messagingSenderId: "772021985616",
-  appId: "1:772021985616:web:43cef4fd7a106dd3378c55",
-  measurementId: "G-XLG0Z2F9QP",
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
 };
-
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
