@@ -22,7 +22,6 @@ const Glass = () => {
         setTotalGlassesToday(userData.totalGlassesToday);
         setCurrentWaterLevel(userData.totalGlassesToday * glassOfWater);
         setTargetWaterLevel(userData.targetWaterLevel);
-
       };
 
       fetchUserData();
@@ -35,11 +34,11 @@ const Glass = () => {
       setTargetWaterLevel(value * 1000);
 
       if (user) {
-      await updateUserData(user.uid, {
-        targetWaterLevel: value*1000,
-        lastUpdated: new Date(),
-      });
-    }
+        await updateUserData(user.uid, {
+          targetWaterLevel: value * 1000,
+          lastUpdated: new Date(),
+        });
+      }
     }
   };
 
@@ -73,80 +72,123 @@ const Glass = () => {
   };
 
   return (
-    <Box sx={{ p: 2, backgroundColor: "green" }}>
-      <Grid container spacing={2} alignItems="center" justifyContent="center">
-        <Grid item xs={12} textAlign="center">
-          <label htmlFor="target-input" className={styles.label}>
-            Choose your target (L)
-          </label>
-          <input
-            id="target-input"
-            type="number"
-            min="0"
-            max="100"
-            step="0.1"
-            value={targetWaterLevel / 1000}
-            onChange={handleChange}
-            className={styles.input}
-          />
-        </Grid>
-        <Grid item display="flex" alignItems="center">
-          <Box
-            sx={{
-              bgcolor: "lightblue",
-              width: "200px",
-              height: "400px",
-              border: "5px solid black",
-              borderRadius: "20px",
-              position: "relative",
-              overflow: "hidden",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+    <Box
+      sx={{
+        p: 2,
+        backgroundColor: "white",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          maxWidth: "1200px",
+          backgroundColor: "#F7F5F5",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "20px",
+          boxSizing: "border-box",
+        }}
+      >
+        <Grid container spacing={2} alignItems="center" justifyContent="center">
+          <Grid item xs={12} textAlign="center">
+            <label htmlFor="target-input" className={styles.label}>
+              Choose your target (L)
+            </label>
+            <input
+              id="target-input"
+              type="number"
+              min="0"
+              max="100"
+              step="0.1"
+              value={targetWaterLevel / 1000}
+              onChange={handleChange}
+              className={styles.input}
+            />
+          </Grid>
+          <Grid item display="flex" alignItems="center">
             <Box
               sx={{
-                width: "100%",
-                bgcolor: "blue",
-                position: "absolute",
-                bottom: 0,
-                height: `${(currentWaterLevel / targetWaterLevel) * 100}%`,
+                bgcolor: "#D9D9D9",
+                width: "200px",
+                height: "400px",
+                border: "5px solid black",
+                borderRadius: "20px",
+                position: "relative",
+                overflow: "hidden",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-            />
-          </Box>
-        </Grid>
-        <Grid item display="flex" alignItems="center">
-          <Box>
-            <p>
-              1 Glass of water contains on an Avg 200ml, Today you had :{" "}
-              {totalGlassesToday}
-            </p>
+            >
+              <Box
+                sx={{
+                  width: "100%",
+                  bgcolor: "#AEEEFF",
+                  position: "absolute",
+                  bottom: 0,
+                  height: `${(currentWaterLevel / targetWaterLevel) * 100}%`,
+                }}
+              />
+            </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
+            <Box textAlign="center" mb={2}>
+              <p>
+                1 Glass of water contains on an average 200ml, Today you have
+                had:
+              </p>
+              <p>{totalGlassesToday} glasses</p>
+            </Box>
             <Button
               variant="contained"
-              color="primary"
-              sx={{ ml: 2 }}
+              sx={{
+                backgroundColor:
+                  "linear-gradient(90deg, rgba(255,223,0,1) 0%, rgba(255,171,0,1) 100%)",
+                color: "black",
+                fontWeight: "bold",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                borderRadius: "12px",
+                mb: 2,
+                "&:hover": {
+                  backgroundColor:
+                    "linear-gradient(90deg, rgba(255,223,0,1) 0%, rgba(255,171,0,1) 100%)",
+                },
+              }}
               onClick={addGlassOfWater}
             >
-              I drank a glass of water!
+              I Drank a Glass of Water
             </Button>
-          </Box>
-        </Grid>
-      </Grid>
-      <Grid container spacing={2} alignItems="center" justifyContent="center">
-        <Grid item display="flex" alignItems="center">
-          <Box sx={{ p: 2 }}>
             <Button
               variant="contained"
-              color="primary"
-              sx={{ ml: 2 }}
+              color="secondary"
+              sx={{
+                backgroundColor: "red",
+                color: "white",
+                fontWeight: "bold",
+                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                borderRadius: "12px",
+                "&:hover": {
+                  backgroundColor: "darkred",
+                },
+              }}
               onClick={resetAll}
             >
               RESET
             </Button>
-          </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </Box>
   );
 };

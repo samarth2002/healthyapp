@@ -1,13 +1,15 @@
+import { Box } from "@mui/material";
 import Glass from "../../components/Glass";
-import SignInButton from "../../components/Navbar/SignInButton";
 import Navbar from "../../components/Navbar/Navbar";
 import "./globals.css";
 
 export default function Home() {
   return (
-    <main>
+    <main className="main-container">
       <Navbar />
-      <Glass />
+      <Box className="content-container">
+        <Glass />
+      </Box>
     </main>
   );
 }
