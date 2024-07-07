@@ -3,6 +3,10 @@
 import { auth, provider } from "../../firebase/config";
 import { signInWithPopup } from "firebase/auth";
 import Button from "@mui/material/Button";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 const SignInButton = () => {
   const signInWithGoogle = async () => {
@@ -13,7 +17,8 @@ const SignInButton = () => {
       console.error("Error during sign in:", error);
     }
   };
-
+ const theme = useTheme();
+ const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Button
       onClick={signInWithGoogle}
@@ -21,9 +26,9 @@ const SignInButton = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "10px",
-        width: "151px",
-        height: "44px",
+        padding: isMobile ? "5px" : "10px",
+        width: isMobile ? "135px" : "151px",
+        height: isMobile ? "35px" : "44px",
         background: "#1D1D1D",
         border: "1px solid #000000",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
@@ -35,7 +40,16 @@ const SignInButton = () => {
         },
       }}
     >
-      Sign in with Google
+      <Typography
+        sx={{
+          fontFamily: "Arial, sans-serif",
+          fontWeight: "bold",
+          color: "#FFFFFF",
+          fontSize: isMobile ? "8px" : "16px",
+        }}
+      >
+        Sign in
+      </Typography>
     </Button>
   );
 };

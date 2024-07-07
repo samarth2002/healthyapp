@@ -3,20 +3,35 @@
 import { Box } from "@mui/material";
 import useAuth from "../../hooks/useAuth";
 import Image from "next/image";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const UserInfo = () => {
   const { user } = useAuth();
-
+const theme = useTheme();
+const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   if (!user) {
-    return <p>No user signed in.</p>;
+    return (
+      <Typography
+        sx={{
+          fontFamily: "Arial, sans-serif",
+          fontWeight: "bold",
+          color: "#FFFFFF",
+          fontSize: isMobile ? "8px" : "16px",
+        }}
+      >
+        No user sign in
+      </Typography>
+    );
   }
 
   return (
     <div>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Image
-          width={59}
-          height={59}
+          width={isMobile ? 30 : 59}
+          height={isMobile ? 30 : 59}
           src={user.photoURL}
           alt="User Avatar"
           style={{
