@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import React from "react";
 import UserInfo from "./UserInfo";
@@ -27,7 +27,6 @@ function Navbar() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          flexDirection: isMobile ? "column" : "row",
         }}
       >
         <Box>(nope we still have to make a logo)</Box>
@@ -37,7 +36,7 @@ function Navbar() {
             alignItems: "center",
             justifyContent: isMobile ? "center" : "center",
             width: isMobile ? "100%" : "auto",
-            textAlign: isMobile ? "center" : "left",
+            textAlign: "left",
           }}
         >
           <Typography
@@ -47,11 +46,11 @@ function Navbar() {
               fontFamily: "Arial, sans-serif",
               fontWeight: "bold",
               color: "#FFFFFF",
-              fontSize: isMobile ? "24px" : "36px",
+              fontSize: isMobile ? "15px" : "36px",
             }}
           >
             The Health App{" "}
-            <span style={{ fontSize: "14px", fontWeight: "normal" }}>
+            <span style={{ fontSize: isMobile?"7px" :"14px", fontWeight: "normal" }}>
               (we are working on the name)
             </span>
           </Typography>
@@ -60,10 +59,10 @@ function Navbar() {
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: isMobile ? "center" : "flex-end",
+            justifyContent: "flex-end",
             width: isMobile ? "100%" : "auto",
             marginTop: isMobile ? "10px" : "0",
-            gap: "10px", // Add spacing between SignInButton and UserInfo
+            gap: "10px",
           }}
         >
           <SignInButton />
