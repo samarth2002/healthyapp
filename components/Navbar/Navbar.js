@@ -29,7 +29,21 @@ function Navbar() {
           justifyContent: "space-between",
         }}
       >
-        <Box>(nope we still have to make a logo)</Box>
+        <Box>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{
+              fontFamily: "Arial, sans-serif",
+              fontWeight: "bold",
+              color: "#FFFFFF",
+              fontSize: isMobile ? "8px" : "16px",
+            }}
+          >
+             (nope we still have to make a logo)
+          </Typography>
+        
+        </Box>
         <Box
           sx={{
             display: "flex",
@@ -50,7 +64,12 @@ function Navbar() {
             }}
           >
             The Health App{" "}
-            <span style={{ fontSize: isMobile?"7px" :"14px", fontWeight: "normal" }}>
+            <span
+              style={{
+                fontSize: isMobile ? "7px" : "14px",
+                fontWeight: "normal",
+              }}
+            >
               (we are working on the name)
             </span>
           </Typography>
@@ -63,6 +82,7 @@ function Navbar() {
             width: isMobile ? "100%" : "auto",
             marginTop: isMobile ? "10px" : "0",
             gap: "10px",
+            flexDirection: isMobile? "column": "row"
           }}
         >
           <SignInButton />
