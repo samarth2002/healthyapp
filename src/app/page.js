@@ -1,14 +1,12 @@
 import Glass from "../../components/Glass";
-import SignInButton from "../../components/SignInButton";
-import UserInfo from "../../components/UserInfo";
+import SignInButton from "../../components/Navbar/SignInButton";
+import Navbar from "../../components/Navbar/Navbar";
 import "./globals.css";
 
 export default function Home() {
   return (
     <main>
-      <h1>Adjust the Water Level</h1>
-      <UserInfo />
-      <SignInButton />
+      <Navbar />
       <Glass />
     </main>
   );
