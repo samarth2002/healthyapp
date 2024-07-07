@@ -29,6 +29,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Read a secret
+        run:  echo "My existing secret is ${{secrets.NEXT_PUBLIC_API_KEY}}"
       - name: Checkout
         uses: actions/checkout@v4
       - name: Detect package manager
