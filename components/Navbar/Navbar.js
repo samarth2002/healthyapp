@@ -46,7 +46,7 @@ function Navbar() {
             display: "flex",
             alignItems: "center",
             justifyContent: isMobile ? "center" : "center",
-            width: isMobile ? "100%" : "auto",
+            width: "auto",
             textAlign: "left",
             flexDirection: isMobile ? "column" : "row",
           }}
