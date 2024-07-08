@@ -1,0 +1,10 @@
+.bottleContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottle {
+    width: 100px;
+    height: 300px;
+}

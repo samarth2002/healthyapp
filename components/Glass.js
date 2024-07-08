@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import styles from "./Glass.module.css";
 import useAuth from "../hooks/useAuth";
 import { getUserData, updateUserData } from "../firebase/firestore";
+import Bottle from "./Bottle";
 
 const Glass = () => {
   const { user } = useAuth();
@@ -111,30 +112,7 @@ const Glass = () => {
             />
           </Grid>
           <Grid item display="flex" alignItems="center">
-            <Box
-              sx={{
-                bgcolor: "#D9D9D9",
-                width: "200px",
-                height: "400px",
-                border: "5px solid black",
-                borderRadius: "20px",
-                position: "relative",
-                overflow: "hidden",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Box
-                sx={{
-                  width: "100%",
-                  bgcolor: "#AEEEFF",
-                  position: "absolute",
-                  bottom: 0,
-                  height: `${(currentWaterLevel / targetWaterLevel) * 100}%`,
-                }}
-              />
-            </Box>
+            <Bottle waterLevel={(currentWaterLevel / targetWaterLevel) * 100} />
           </Grid>
           <Grid
             item
