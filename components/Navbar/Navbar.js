@@ -29,7 +29,7 @@ function Navbar() {
           justifyContent: "space-between",
         }}
       >
-        <Box>
+        <Box sx = {{flex: '0.1'}}>
           <Typography
             sx={{
               fontFamily: "Arial, sans-serif",
@@ -49,6 +49,7 @@ function Navbar() {
             width: "auto",
             textAlign: "left",
             flexDirection: isMobile ? "column" : "row",
+            flex: '0.8'
           }}
         >
           <Typography
@@ -79,6 +80,7 @@ function Navbar() {
             marginTop: isMobile ? "10px" : "0",
             gap: "10px",
             flexDirection: isMobile ? "column" : "row",
+            flex: '0.1'
           }}
         >
           <SignInButton />
