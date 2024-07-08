@@ -31,18 +31,15 @@ function Navbar() {
       >
         <Box>
           <Typography
-            variant="h6"
-            component="div"
             sx={{
               fontFamily: "Arial, sans-serif",
               fontWeight: "bold",
               color: "#FFFFFF",
-              fontSize: isMobile ? "8px" : "16px",
+              fontSize: isMobile ? "10px" : "16px",
             }}
           >
-             (nope we still have to make a logo)
+            (nope we still have to make a logo)
           </Typography>
-        
         </Box>
         <Box
           sx={{
@@ -51,38 +48,37 @@ function Navbar() {
             justifyContent: isMobile ? "center" : "center",
             width: isMobile ? "100%" : "auto",
             textAlign: "left",
+            flexDirection: isMobile ? "column" : "row",
           }}
         >
           <Typography
-            variant="h6"
-            component="div"
             sx={{
               fontFamily: "Arial, sans-serif",
               fontWeight: "bold",
               color: "#FFFFFF",
-              fontSize: isMobile ? "15px" : "36px",
+              fontSize: isMobile ? "24px" : "36px",
             }}
           >
             The Health App{" "}
-            <span
-              style={{
-                fontSize: isMobile ? "7px" : "14px",
-                fontWeight: "normal",
-              }}
-            >
-              (we are working on the name)
-            </span>
           </Typography>
+          <span
+            style={{
+              fontSize: isMobile ? "11px" : "14px",
+              fontWeight: "normal",
+            }}
+          >
+            (we are working on the name)
+          </span>
         </Box>
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
             justifyContent: "flex-end",
-            width: isMobile ? "100%" : "auto",
+            width:  "auto",
             marginTop: isMobile ? "10px" : "0",
             gap: "10px",
-            flexDirection: isMobile? "column": "row"
+            flexDirection: isMobile ? "column" : "row",
           }}
         >
           <SignInButton />
