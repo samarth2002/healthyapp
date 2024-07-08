@@ -9,11 +9,12 @@ import Toolbar from "@mui/material/Toolbar";
 import SignInButton from "./SignInButton";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
+import useAuth from "../../hooks/useAuth";
 
 function Navbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const user = useAuth()
   return (
     <AppBar
       position="static"

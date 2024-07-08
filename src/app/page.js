@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Glass from "../../components/Glass";
+import Glass from "../../components/Water/Glass";
 import Navbar from "../../components/Navbar/Navbar";
 import "./globals.css";
 

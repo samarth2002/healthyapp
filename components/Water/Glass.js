@@ -5,8 +5,8 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import styles from "./Glass.module.css";
-import useAuth from "../hooks/useAuth";
-import { getUserData, updateUserData } from "../firebase/firestore";
+import useAuth from "../../hooks/useAuth";
+import { getUserData, updateUserData } from "../../firebase/firestore";
 import Bottle from "./Bottle";
 
 const Glass = () => {
