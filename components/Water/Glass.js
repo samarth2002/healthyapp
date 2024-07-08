@@ -102,11 +102,8 @@ const Glass = () => {
             </label>
             <input
               id="target-input"
-              type="number"
-              min="0"
-              max="100"
-              step="0.1"
-              value={targetWaterLevel / 1000}
+              type="text"
+              defaultValue={targetWaterLevel/100}
               onChange={handleChange}
               className={styles.input}
             />
