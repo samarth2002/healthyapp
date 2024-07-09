@@ -9,7 +9,7 @@ const Bottle = ({ waterLevel }) => {
   const capHeight = 20;
   const bottleColor = "#A9A9A9"; // Light grey
   const waterColor = "#ADD8E6"; // Light blue
-
+  console.log(waterLevel)
   return (
     <Box>
       <svg width="100" height="220" viewBox="0 0 100 220">
@@ -43,9 +43,9 @@ const Bottle = ({ waterLevel }) => {
         {/* Draw the water, clipped by the bottle */}
         <rect
           x="20"
-          y={20 + bottleHeight - waterLevel}
+          y={20 + bottleHeight - ((waterLevel * bottleHeight) / 100)}
           width={bottleWidth}
-          height={waterLevel}
+          height={(waterLevel * bottleHeight) / 100}
           fill={waterColor}
           clipPath="url(#bottleClip)"
         />
