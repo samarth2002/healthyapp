@@ -2,28 +2,35 @@
 
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import styles from "./Glass.module.css";
 import useAuth from "../../hooks/useAuth";
-import { getUserData, updateUserData } from "../../firebase/firestore";
+import {
+  getUserData,
+  getWeeklyData,
+  updateUserData,
+  updateWeeklyData,
+} from "../../firebase/firestore";
 import Glass from "./Glass";
 import Stats from "./Stats";
 import TargetComplete from "./TargetComplete";
-
+import WeeklyGraph from "./WeeklyGraph";
 
 function Water() {
-      const { user } = useAuth();
-      const [targetWaterLevel, setTargetWaterLevel] = useState(3000.0);
-      const [currentWaterLevel, setCurrentWaterLevel] = useState(0.0);
-      const [totalGlassesToday, setTotalGlassesToday] = useState(0);
+  const { user } = useAuth();
+  const [targetWaterLevel, setTargetWaterLevel] = useState(3000.0);
+  const [currentWaterLevel, setCurrentWaterLevel] = useState(0.0);
+  const [totalGlassesToday, setTotalGlassesToday] = useState(0);
   const glassOfWater = 200.0;
 
-      
   useEffect(() => {
     if (user) {
+      
+    const currentDay = new Date().toLocaleString("en-US", { weekday: "long" });
+
       const fetchUserData = async () => {
+     
         const userData = await getUserData(user.uid);
+        const weeklyData = await getWeeklyData(user.uid);
+
         setTotalGlassesToday(userData.totalGlassesToday);
         setCurrentWaterLevel(userData.totalGlassesToday * glassOfWater);
         setTargetWaterLevel(userData.targetWaterLevel);
@@ -32,6 +39,9 @@ function Water() {
       fetchUserData();
     }
   }, [user]);
+
+ 
+
   return (
     <Box
       sx={{
@@ -44,7 +54,9 @@ function Water() {
         flexDirection: "column",
       }}
     >
-      {totalGlassesToday*200>=targetWaterLevel&&<TargetComplete />}
+      {totalGlassesToday * glassOfWater >= targetWaterLevel && (
+        <TargetComplete />
+      )}
 
       <Glass
         targetWaterLevel={targetWaterLevel}
@@ -59,6 +71,7 @@ function Water() {
         currentWaterLevel={currentWaterLevel}
         totalGlassesToday={totalGlassesToday}
       />
+      <WeeklyGraph />
     </Box>
   );
 }

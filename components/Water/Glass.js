@@ -6,8 +6,11 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import styles from "./Glass.module.css";
 import useAuth from "../../hooks/useAuth";
-import { getUserData, updateUserData } from "../../firebase/firestore";
 import Bottle from "./Bottle";
+import {
+  updateUserData,
+  updateWeeklyData,
+} from "../../firebase/firestore";
 
 const Glass = ({
   targetWaterLevel,
@@ -37,16 +40,21 @@ const Glass = ({
   const addGlassOfWater = async () => {
     const newTotalGlasses = totalGlassesToday + 1;
     const newCurrentWaterLevel = currentWaterLevel + glassOfWater;
-
+    const currentDay = new Date().toLocaleString("en-US", { weekday: "long" });
     setCurrentWaterLevel(newCurrentWaterLevel);
     setTotalGlassesToday(newTotalGlasses);
 
-    if (user) {
-      await updateUserData(user.uid, {
-        totalGlassesToday: newTotalGlasses,
-        lastUpdated: new Date(),
-      });
-    }
+     if (user) {
+       await updateWeeklyData(user.uid, new Date(), currentDay, {
+         glassesDrunk: newTotalGlasses,
+         waterIntake: newCurrentWaterLevel,
+         targetWaterLevel: targetWaterLevel,
+       });
+       await updateUserData(user.uid, {
+         totalGlassesToday: newTotalGlasses,
+         lastUpdated: new Date(),
+       });
+     }
   };
 
   const resetAll = async () => {

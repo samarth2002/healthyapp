@@ -9,7 +9,6 @@ const Bottle = ({ waterLevel }) => {
   const capHeight = 20;
   const bottleColor = "#A9A9A9"; // Light grey
   const waterColor = "#ADD8E6"; // Light blue
-  console.log(waterLevel)
   return (
     <Box>
       <svg width="100" height="220" viewBox="0 0 100 220">
