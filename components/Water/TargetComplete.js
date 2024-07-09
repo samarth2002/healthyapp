@@ -23,11 +23,11 @@ function TargetComplete() {
       >
         You achieved your target water intake!!
       </Typography>
-      <Image
+      {/* <Image
         src='/jatt.png'
         height={300}
         width={400}
-      />
+      /> */}
     </Box>
   );
 }
