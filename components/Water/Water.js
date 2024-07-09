@@ -9,7 +9,7 @@ import useAuth from "../../hooks/useAuth";
 import { getUserData, updateUserData } from "../../firebase/firestore";
 import Glass from "./Glass";
 import Stats from "./Stats";
-
+import TargetComplete from "./TargetComplete";
 
 
 function Water() {
@@ -44,6 +44,8 @@ function Water() {
         flexDirection: "column",
       }}
     >
+      {totalGlassesToday*200>=targetWaterLevel&&<TargetComplete />}
+
       <Glass
         targetWaterLevel={targetWaterLevel}
         currentWaterLevel={currentWaterLevel}
