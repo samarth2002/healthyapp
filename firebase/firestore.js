@@ -3,20 +3,45 @@ import { db } from "./config";
 import { getWeekId } from "../utils/getWeekId";
 
 export const getUserData = async (userId) => {
-  const userDoc = doc(db, "users", userId);
+    const userDoc = doc(db, 'users', userId);
   const userSnapshot = await getDoc(userDoc);
+  const today = new Date();
+  const initialData = { 
+    totalGlassesToday: 0, 
+    targetWaterLevel: 3000.0, 
+    lastUpdated: Timestamp.fromDate(today), 
+    username: ""
+  };
+
   if (userSnapshot.exists()) {
-    return userSnapshot.data();
+    const userData = userSnapshot.data();
+    const lastUpdated = userData.lastUpdated.toDate();
+
+    // Check if the current date is different than lastUpdated
+    if (today.getDate() !== lastUpdated.getDate() || 
+        today.getMonth() !== lastUpdated.getMonth() || 
+        today.getFullYear() !== lastUpdated.getFullYear()) {
+      // Update the user data for a new day
+      await setDoc(userDoc, {
+        ...userData,
+        totalGlassesToday: 0,
+        lastUpdated: Timestamp.fromDate(today)
+      });
+      return {
+        ...userData,
+        totalGlassesToday: 0,
+        lastUpdated: Timestamp.fromDate(today)
+      };
+    }
+
+    return userData;
   } else {
-    const initialData = {
-      totalGlassesToday: 0,
-      targetWaterLevel: 3000.0,
-      lastUpdated: new Date(),
-    };
+    // User does not exist, create default data
     await setDoc(userDoc, initialData);
     return initialData;
   }
 };
+
 
 export const updateUserData = async (userId, data) => {
   const userDoc = doc(db, "users", userId);
