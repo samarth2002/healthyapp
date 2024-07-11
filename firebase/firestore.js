@@ -1,6 +1,8 @@
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "./config";
 import { getWeekId } from "../utils/getWeekId";
+import { Timestamp } from "firebase/firestore";
+
 
 export const getUserData = async (userId) => {
     const userDoc = doc(db, 'users', userId);
