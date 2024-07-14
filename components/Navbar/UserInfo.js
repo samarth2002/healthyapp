@@ -28,6 +28,8 @@ const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   }else{
     updateUserData(user.uid, {
       username: user.displayName,
+      email: user.email,
+      userId: user.uid,
     } )
   }
  

@@ -9,10 +9,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 
 const SignInButton = () => {
+
+ 
+
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       console.log("User info:", result.user);
+      window.location.reload();
     } catch (error) {
       console.error("Error during sign in:", error);
     }

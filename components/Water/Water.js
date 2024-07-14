@@ -23,10 +23,11 @@ function Water() {
 
   useEffect(() => {
     if (user) {
-      
+      console.log('8')
     const currentDay = new Date().toLocaleString("en-US", { weekday: "long" });
 
       const fetchUserData = async () => {
+      console.log("9");
      
         const userData = await getUserData(user.uid);
         const weeklyData = await getWeeklyData(user.uid);
@@ -34,6 +35,9 @@ function Water() {
         setTotalGlassesToday(userData.totalGlassesToday);
         setCurrentWaterLevel(userData.totalGlassesToday * glassOfWater);
         setTargetWaterLevel(userData.targetWaterLevel);
+
+      console.log("10");
+
       };
 
       fetchUserData();

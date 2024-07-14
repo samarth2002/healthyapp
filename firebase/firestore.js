@@ -8,11 +8,16 @@ export const getUserData = async (userId) => {
     const userDoc = doc(db, 'users', userId);
   const userSnapshot = await getDoc(userDoc);
   const today = new Date();
-  const initialData = { 
-    totalGlassesToday: 0, 
-    targetWaterLevel: 3000.0, 
-    lastUpdated: Timestamp.fromDate(today), 
-    username: ""
+  const initialData = {
+    totalGlassesToday: 0,
+    targetWaterLevel: 3000.0,
+    lastUpdated: Timestamp.fromDate(today),
+    username: "",
+    email: "",
+    userId: "",
+    groupIds: [],
+    invites: []
+     
   };
 
   if (userSnapshot.exists()) {
@@ -49,6 +54,8 @@ export const updateUserData = async (userId, data) => {
   const userDoc = doc(db, "users", userId);
   await updateDoc(userDoc, data);
 };
+
+
 
 export const getWeeklyData = async (userId) => {
   const weekId = getWeekId();

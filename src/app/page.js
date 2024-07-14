@@ -5,6 +5,8 @@ import "./globals.css";
 import Stats from "../../components/Water/Stats";
 import Water from "../../components/Water/Water";
 import TargetComplete from "../../components/Water/TargetComplete";
+import Group from "../../components/Groups/Group";
+import Groups from "../../components/Groups/Groups";
 
 export default function Home() {
 
@@ -17,6 +19,7 @@ export default function Home() {
         sx={{ display: "flex", flexDirection: "column" }}
       >
         <Water />
+        <Groups />
       </Box>
     </main>
   );

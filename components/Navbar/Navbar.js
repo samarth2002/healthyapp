@@ -10,6 +10,7 @@ import SignInButton from "./SignInButton";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import useAuth from "../../hooks/useAuth";
+import Invites from './Invites'
 
 function Navbar() {
   const theme = useTheme();
@@ -84,6 +85,7 @@ function Navbar() {
             flex: '0.1'
           }}
         >
+          <Invites />
           <SignInButton />
           <UserInfo />
         </Box>
