@@ -16,22 +16,22 @@ function Stats({ targetWaterLevel, currentWaterLevel, totalGlassesToday }) {
     <Box
       sx={{
         width: "100%",
-        maxWidth: "1200px",
-        backgroundColor: "white",
+        backgroundColor: "#F7F5F5",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "20px",
+        padding: "120px",
         boxSizing: "border-box",
         flexDirection: "column",
       }}
     >
       <Typography
         sx={{
-          fontFamily: "Arial, sans-serif",
+          fontFamily: "Open Sans, sans-serif",
+
           fontWeight: "bold",
           color: "black",
-          fontSize: "25px",
+          fontSize: "40px",
         }}
       >
         Stats
@@ -40,7 +40,8 @@ function Stats({ targetWaterLevel, currentWaterLevel, totalGlassesToday }) {
         <Box sx={{ display: "flex" }}>
           <Typography
             sx={{
-              fontFamily: "Arial, sans-serif",
+              fontFamily: "Open Sans, sans-serif",
+
               fontWeight: "bold",
               color: "black",
               fontSize: "16px",
@@ -51,7 +52,8 @@ function Stats({ targetWaterLevel, currentWaterLevel, totalGlassesToday }) {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Arial, sans-serif",
+              fontFamily: "Open Sans, sans-serif",
+
               fontWeight: "bold",
               color: "black",
               fontSize: "16px",
@@ -64,7 +66,8 @@ function Stats({ targetWaterLevel, currentWaterLevel, totalGlassesToday }) {
         <Box sx={{ display: "flex" }}>
           <Typography
             sx={{
-              fontFamily: "Arial, sans-serif",
+              fontFamily: "Open Sans, sans-serif",
+
               fontWeight: "bold",
               color: "black",
               fontSize: "16px",
@@ -75,20 +78,24 @@ function Stats({ targetWaterLevel, currentWaterLevel, totalGlassesToday }) {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Arial, sans-serif",
+              fontFamily: "Open Sans, sans-serif",
+
               fontWeight: "bold",
               color: "black",
               fontSize: "16px",
               padding: "10px",
             }}
           >
-            {totalGlassesToday*200<=targetWaterLevel?targetWaterLevel / 200 - totalGlassesToday: 0}
+            {totalGlassesToday * 200 <= targetWaterLevel
+              ? targetWaterLevel / 200 - totalGlassesToday
+              : 0}
           </Typography>
         </Box>
         <Box sx={{ display: "flex" }}>
           <Typography
             sx={{
-              fontFamily: "Arial, sans-serif",
+              fontFamily: "Open Sans, sans-serif",
+
               fontWeight: "bold",
               color: "black",
               fontSize: "16px",
@@ -99,14 +106,17 @@ function Stats({ targetWaterLevel, currentWaterLevel, totalGlassesToday }) {
           </Typography>
           <Typography
             sx={{
-              fontFamily: "Arial, sans-serif",
+              fontFamily: "Open Sans, sans-serif",
+
               fontWeight: "bold",
               color: "black",
               fontSize: "16px",
               padding: "10px",
             }}
           >
-            {totalGlassesToday*200<=targetWaterLevel?(targetWaterLevel) - totalGlassesToday*200: 0}
+            {totalGlassesToday * 200 <= targetWaterLevel
+              ? targetWaterLevel - totalGlassesToday * 200
+              : 0}
           </Typography>
         </Box>
       </Box>

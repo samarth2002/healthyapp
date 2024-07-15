@@ -34,29 +34,33 @@ function Navbar() {
         <Box sx = {{flex: '0.1'}}>
           <Typography
             sx={{
-              fontFamily: "Arial, sans-serif",
+              fontFamily: "Open Sans, sans-serif",
+
+
               fontWeight: "bold",
               color: "#FFFFFF",
               fontSize: isMobile ? "10px" : "16px",
             }}
           >
-            (nope we still have to make a logo)
+            Logo
           </Typography>
         </Box>
         <Box
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: isMobile ? "center" : "center",
+            justifyContent: isMobile ? "center" : "right",
             width: "auto",
             textAlign: "left",
             flexDirection: isMobile ? "column" : "row",
-            flex: '0.8'
+            flex: '0.5',
           }}
         >
           <Typography
             sx={{
-              fontFamily: "Arial, sans-serif",
+              fontFamily: "Open Sans, sans-serif",
+
+
               fontWeight: "bold",
               color: "#FFFFFF",
               fontSize: isMobile ? "24px" : "36px",
@@ -64,14 +68,7 @@ function Navbar() {
           >
             The Health App{" "}
           </Typography>
-          <span
-            style={{
-              fontSize: isMobile ? "11px" : "14px",
-              fontWeight: "normal",
-            }}
-          >
-            (we are working on the name)
-          </span>
+         
         </Box>
         <Box
           sx={{
@@ -82,7 +79,7 @@ function Navbar() {
             marginTop: isMobile ? "10px" : "0",
             gap: "10px",
             flexDirection: isMobile ? "column" : "row",
-            flex: '0.1'
+            flex: '0.4',
           }}
         >
           <Invites />

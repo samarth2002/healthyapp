@@ -16,7 +16,7 @@ export default function Home() {
 
       <Box
         className="content-container"
-        sx={{ display: "flex", flexDirection: "column" }}
+        sx={{ display: "flex", flexDirection: "column", width: '100%' }}
       >
         <Water />
         <Groups />

@@ -12,10 +12,17 @@ import Image from "next/image";
 
 function TargetComplete() {
   return (
-    <Box sx={{display:'flex', flexDirection:'column', justifyContent: 'center', alignItems: 'center'}}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Typography
         sx={{
-          fontFamily: "Arial, sans-serif",
+          fontFamily: "Open Sans, sans-serif",
           fontWeight: "bold",
           color: "black",
           fontSize: "25px",

@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import {
   Chart,
   BarElement,
@@ -75,10 +79,19 @@ const WeeklyGraph = () => {
   };
 
   return (
-    <div>
+    <Box  sx={{
+        width: "50%",
+        backgroundColor: "white",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "50px",
+        boxSizing: "border-box",
+        flexDirection: "column",
+      }}>
       <h2>Weekly Water Intake</h2>
       <Bar data={data} options={options} />
-    </div>
+    </Box>
   );
 };
 

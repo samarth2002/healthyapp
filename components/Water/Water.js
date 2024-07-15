@@ -49,13 +49,13 @@ function Water() {
   return (
     <Box
       sx={{
-        p: 2,
         backgroundColor: "white",
         height: "auto",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        width: '100%'
       }}
     >
       {totalGlassesToday * glassOfWater >= targetWaterLevel && (

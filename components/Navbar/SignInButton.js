@@ -46,7 +46,7 @@ const SignInButton = () => {
     >
       <Typography
         sx={{
-          fontFamily: "Arial, sans-serif",
+          fontFamily: "Open Sans, sans-serif",
           fontWeight: "bold",
           color: "#FFFFFF",
           fontSize: isMobile ? "8px" : "16px",

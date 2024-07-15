@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import styles from "./Glass.module.css";
 import useAuth from "../../hooks/useAuth";
 import Bottle from "./Bottle";
+import { Typography } from "@mui/material";
 import {
   updateUserData,
   updateWeeklyData,
@@ -75,12 +76,11 @@ const Glass = ({
     <Box
       sx={{
         width: "100%",
-        maxWidth: "1200px",
-        backgroundColor: "#F7F5F5",
+        backgroundColor: "white",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "20px",
+        padding: "100px",
         boxSizing: "border-box",
       }}
     >
@@ -107,11 +107,28 @@ const Glass = ({
           flexDirection="column"
           alignItems="center"
         >
-          <Box textAlign="center" mb={2}>
-            <p>
+          <Box textAlign="center" mb={2} sx = {{padding: '15px'}}>
+            <p></p>
+            <Typography
+              sx={{
+                fontFamily: "Open Sans, sans-serif",
+                fontWeight: "bold",
+                color: "black",
+                fontSize: "16px",
+              }}
+            >
               1 Glass of water contains on an average 200ml, Today you have had:
-            </p>
-            <p>{totalGlassesToday} glasses</p>
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: "Open Sans, sans-serif",
+                fontWeight: "bold",
+                color: "black",
+                fontSize: "25px",
+              }}
+            >
+              {totalGlassesToday} glasses
+            </Typography>
           </Box>
           <Button
             variant="contained"
@@ -123,6 +140,7 @@ const Glass = ({
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               borderRadius: "12px",
               mb: 2,
+              fontFamily: "Open Sans, sans-serif",
               "&:hover": {
                 backgroundColor:
                   "linear-gradient(90deg, rgba(255,223,0,1) 0%, rgba(255,171,0,1) 100%)",
@@ -141,6 +159,7 @@ const Glass = ({
               fontWeight: "bold",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               borderRadius: "12px",
+              fontFamily: "Open Sans, sans-serif",
               "&:hover": {
                 backgroundColor: "darkred",
               },

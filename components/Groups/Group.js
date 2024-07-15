@@ -52,7 +52,7 @@ function Group({ groupId, firstMember, onDelete }) {
           username: user.displayName,
           email: user.email,
         });
-        console.log("Invite sent to:", email);
+                alert("Invite sent");
       }
     } else {
       console.log("Please create a group first");
@@ -107,16 +107,21 @@ function Group({ groupId, firstMember, onDelete }) {
       sx={{
         width: "100%",
         maxWidth: "600px",
+        minHeight: "330px",
         height: "auto",
-        backgroundColor: "#F7F5F5",
+        backgroundColor: "#f3f3f3",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         boxSizing: "border-box",
+        border: "1px solid black",
+        padding: "15px",
+        borderRadius: "12px",
       }}
     >
-      <Typography>{groupName}</Typography>
-
+      <Typography sx={{ fontFamily: "Open Sans, sans-serif" }}>
+        {groupName}
+      </Typography>
       {createdByUser?.userId === user?.uid && (
         <Box
           sx={{
@@ -143,7 +148,10 @@ function Group({ groupId, firstMember, onDelete }) {
                 "linear-gradient(90deg, rgba(255,223,0,1) 0%, rgba(255,171,0,1) 100%)",
               color: "black",
               fontWeight: "bold",
+              fontSize: "12px",
+
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+              fontFamily: "Open Sans, sans-serif",
               borderRadius: "12px",
               "&:hover": {
                 backgroundColor:
@@ -167,6 +175,8 @@ function Group({ groupId, firstMember, onDelete }) {
               fontWeight: "bold",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               borderRadius: "12px",
+              fontFamily: "Open Sans, sans-serif",
+
               "&:hover": {
                 backgroundColor:
                   "linear-gradient(90deg, rgba(255,223,0,1) 0%, rgba(255,171,0,1) 100%)",
@@ -182,11 +192,13 @@ function Group({ groupId, firstMember, onDelete }) {
               marginLeft: "10px",
               width: "100px",
               height: "40px",
+              fontSize: "12px",
               backgroundColor: "red",
               color: "white",
               fontWeight: "bold",
               boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
               borderRadius: "12px",
+              fontFamily: "Open Sans, sans-serif",
               "&:hover": {
                 backgroundColor: "darkred",
               },
@@ -197,9 +209,14 @@ function Group({ groupId, firstMember, onDelete }) {
           </Button>
         </Box>
       )}
-
       <List
-        sx={{ width: "100%", maxWidth: "360px", bgcolor: "background.paper" }}
+        sx={{
+          width: "100%",
+          maxWidth: "360px",
+          bgcolor: "background.paper",
+          borderRadius: "12px",
+          fontFamily: "Open Sans, sans-serif",
+        }}
       >
         {members.map((member, index) => (
           <ListItem key={index}>
@@ -210,6 +227,12 @@ function Group({ groupId, firstMember, onDelete }) {
                   : member.username
               }
               secondary={`Email: ${member.email} | Glasses: ${member.totalGlassesToday} | Target: ${member.targetWaterLevel}ml | Intake: ${member.waterIntake}ml`}
+              primaryTypographyProps={{
+                style: { fontFamily: "Open Sans, sans-serif" },
+              }}
+              secondaryTypographyProps={{
+                style: { fontFamily: "Open Sans, sans-serif" },
+              }}
             />
           </ListItem>
         ))}
