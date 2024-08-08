@@ -8,14 +8,12 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import TextField from "@mui/material/TextField";
-import {
-  sendInvite,
-  getGroupData,
-  deleteGroup,
-} from "../../firebase/firestoreGroups";
+
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios"
+
 
 function Group({ groupId, firstMember, onDelete }) {
   const [members, setMembers] = useState([]);
@@ -26,11 +24,24 @@ function Group({ groupId, firstMember, onDelete }) {
   useEffect(() => {
     if (groupId) {
       const fetchGroupData = async () => {
-        const groupData = await getGroupData(groupId);
-        setGroupName(groupData.groupName);
-        setMembers(groupData.members);
-        setCreatedByUser(groupData.createdByUser);
-        refreshGroups(groupData.members);
+        try {
+           const response = await axios.post(
+             `https://be-healthyapp-production.up.railway.app/groups/getGroupData`,
+             {
+               groupId,
+             }
+           );
+          const groupData = response.data;
+          console.log(groupData);
+
+          setGroupName(groupData.groupName);
+          setMembers(groupData.members);
+          setCreatedByUser(groupData.createdByUser);
+          refreshGroups(groupData.members);
+        } catch (error) {
+          console.error(error)
+        }
+        
       };
 
       fetchGroupData();
@@ -39,21 +50,41 @@ function Group({ groupId, firstMember, onDelete }) {
 
   const handleAddGroupMember = async () => {
     if (groupId) {
-      const groupData = await getGroupData(groupId);
-      const isMemberAlready = groupData.members.some(
-        (member) => member.email === email
-      );
+        try {
+          const response = await axios.post(
+            `https://be-healthyapp-production.up.railway.app/groups/getGroupData`,
+            {
+              groupId,
+            }
+          );
+          const groupData = response.data;
+          const isMemberAlready = groupData.members.some(
+            (member) => member.email === email
+          );
 
-      if (isMemberAlready) {
-        alert("User is already a member of the group.");
-      } else {
-        await sendInvite(email, groupId, groupName, {
-          userId: user.uid,
-          username: user.displayName,
-          email: user.email,
-        });
-                alert("Invite sent");
-      }
+          if (isMemberAlready) {
+            alert("User is already a member of the group.");
+          } else {
+            try {
+              await axios.post(`https://be-healthyapp-production.up.railway.app/groups/sendGroupInvite`, {
+                email,
+                groupId,
+                groupName,
+                inviter: {
+                  userId: user.uid,
+                  username: user.displayName,
+                  email: user.email,
+                },
+              });
+              alert("Invite sent");
+            } catch (error) {
+              console.error(error);
+            }
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      
     } else {
       console.log("Please create a group first");
     }
@@ -61,13 +92,27 @@ function Group({ groupId, firstMember, onDelete }) {
 
   const handleDeleteGroup = async () => {
     if (groupId) {
-      await deleteGroup(groupId);
-      onDelete(groupId);
+       try {
+         await axios.post(`https://be-healthyapp-production.up.railway.app/groups/deleteGroup`, {
+           groupId,
+         });
+        onDelete(groupId);
+
+       } catch (error) {
+         console.error(error);
+       }
     }
   };
 
   const refreshGroups = async () => {
-    const groupData = await getGroupData(groupId);
+      try {
+        const response = await axios.post(
+          `https://be-healthyapp-production.up.railway.app/groups/getGroupData`,
+          {
+            groupId,
+          }
+        );
+    const groupData = response.data;
     setMembers(groupData.members);
 
     const groupMembers = groupData.members;
@@ -99,7 +144,12 @@ function Group({ groupId, firstMember, onDelete }) {
           });
         });
       }
-    }
+
+      } }catch (error) {
+        console.error(error);
+      }
+    
+    
   };
 
   return (

@@ -3,16 +3,11 @@
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import useAuth from "../../hooks/useAuth";
-import {
-  getUserData,
-  getWeeklyData,
-  updateUserData,
-  updateWeeklyData,
-} from "../../firebase/firestore";
 import Glass from "./Glass";
 import Stats from "./Stats";
 import TargetComplete from "./TargetComplete";
 import WeeklyGraph from "./WeeklyGraph";
+import axios from "axios";
 
 function Water() {
   const { user } = useAuth();
@@ -23,20 +18,26 @@ function Water() {
 
   useEffect(() => {
     if (user) {
-      console.log('8')
-    const currentDay = new Date().toLocaleString("en-US", { weekday: "long" });
 
       const fetchUserData = async () => {
-      console.log("9");
+      
+        try{
+          const userId = user.uid
+    const response = await axios.post(
+            `https://be-healthyapp-production.up.railway.app/water/getUserData`,
+            {
+              userId,
+            }
+          );
+          const userData = response.data
+          setTotalGlassesToday(userData.totalGlassesToday);
+          setCurrentWaterLevel(userData.totalGlassesToday * glassOfWater);
+          setTargetWaterLevel(userData.targetWaterLevel);
+        }catch(err){
+          console.error(err)
+        }
      
-        const userData = await getUserData(user.uid);
-        const weeklyData = await getWeeklyData(user.uid);
 
-        setTotalGlassesToday(userData.totalGlassesToday);
-        setCurrentWaterLevel(userData.totalGlassesToday * glassOfWater);
-        setTargetWaterLevel(userData.targetWaterLevel);
-
-      console.log("10");
 
       };
 

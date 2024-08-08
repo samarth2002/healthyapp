@@ -10,16 +10,11 @@ import Group from "./Group";
 import TextField from "@mui/material/TextField";
 import { arrayUnion } from "firebase/firestore";
 
-
-import { updateUserData, getUserData } from "../../firebase/firestore";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
-import {
-  addGroupMember,
-  createGroup,
-  getGroupData,
-} from "../../firebase/firestoreGroups";
+
+import axios from "axios";
 
 function Groups() {
   const { user } = useAuth();
@@ -29,8 +24,18 @@ function Groups() {
   useEffect(() => {
     if (user) {
       const fetchUserData = async () => {
-        const userData = await getUserData(user.uid);
-        setGroups(userData.groupIds);
+        try {
+          const response = await axios.post(
+            `https://be-healthyapp-production.up.railway.app/water/getUserData`,
+            {
+              userId: user.uid,
+            }
+          );
+          const userData = response.data;
+          setGroups(userData.groupIds);
+        } catch (error) {
+          console.error(error);
+        }
       };
 
       fetchUserData();
@@ -38,33 +43,58 @@ function Groups() {
   }, [user]);
 
   const handleCreateGroup = async () => {
-    const newGroupId = await createGroup(
-      newGroupName,
-      {
+    try {
+      const newGroupId = await axios.post(
+        `https://be-healthyapp-production.up.railway.app/groups/createNewGroup`,
+        {
+          groupName: newGroupName,
+          createdByUser: {
+            userId: user.uid,
+            username: user.displayName,
+            email: user.email,
+          },
+        }
+      );
+      console.log(newGroupId)
+      try {
+        await axios.post(
+          `https://be-healthyapp-production.up.railway.app/groups/addGroupMember`,
+          {
+            groupId: newGroupId.data, member: {
         userId: user.uid,
         username: user.displayName,
         email: user.email,
-      },
-      []
-    );
+      }
+          }
+        );
+          try {
+           setGroups([...groups, newGroupId.data]);
+            await axios.post(`https://be-healthyapp-production.up.railway.app/water/updateNewUserData`, {
+              userId: user.uid,
+              data: {
+                groupIds: newGroupId.data,
+              },
+            });
+          } catch (err) {
+            console.error(err);
+          }
 
-    addGroupMember(newGroupId, {
-      userId: user.uid,
-      username: user.displayName,
-      email: user.email,
-    });
-    setGroups([...groups, newGroupId]);
-    updateUserData(user.uid, {
-      groupIds: arrayUnion(newGroupId),
-    });
 
-    alert("Group created");
+           alert("Group created");
+      } catch (err) {
+        console.error(err);
+      }
+
+      
+   
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const handleDeleteGroup = (groupId) => {
     setGroups(groups.filter((group) => group !== groupId));
     alert("Group deleted");
-
   };
 
   return (
@@ -156,7 +186,11 @@ function Groups() {
             </Box>
           ))
         ) : (
-          <Typography sx={{ color: "white" , fontFamily: "Open Sans, sans-serif"}}>No groups found</Typography>
+          <Typography
+            sx={{ color: "white", fontFamily: "Open Sans, sans-serif" }}
+          >
+            No groups found
+          </Typography>
         )}
       </Box>
     </Box>

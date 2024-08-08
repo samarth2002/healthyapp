@@ -9,10 +9,11 @@ import ListItemText from "@mui/material/ListItemText";
 import IconButton from "@mui/material/IconButton";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { acceptInvite, rejectInvite } from "../../firebase/firestoreGroups";
 import useAuth from "../../hooks/useAuth";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/config";
+import axios from "axios";
+
 
 const InviteDropDown = () => {
   const { user } = useAuth();
@@ -39,19 +40,35 @@ const InviteDropDown = () => {
   }, [user]);
 
   const handleAccept = async (invite) => {
-    await acceptInvite(
-      user.uid,
-      user.email,
-      user.displayName,
-      invite.id,
-      invite.groupId
-    );
-    setInvites(invites.filter((i) => i.id !== invite.id));
+    try {
+       await axios.post(`https://be-healthyapp-production.up.railway.app/invites/acceptGroupInvite`, {
+         userId: user.uid,
+         userEmail: user.email,
+         userName: user.displayName,
+         inviteId: invite.id,
+         groupId: invite.groupId,
+       });
+      setInvites(invites.filter((i) => i.id !== invite.id));
+
+    } catch (error) {
+      console.error(error)
+    }
+  
   };
 
   const handleReject = async (invite) => {
-    await rejectInvite(user.uid, invite.id);
-    setInvites(invites.filter((i) => i.id !== invite.id));
+      try {
+        await axios.post(
+          `https://be-healthyapp-production.up.railway.app/invites/rejectGroupInvite`,
+          {
+            userId: user.uid,
+            inviteId: invite.id
+          }
+        );
+        setInvites(invites.filter((i) => i.id !== invite.id));
+      } catch (error) {
+        console.error(error);
+      }
   };
  
   return (

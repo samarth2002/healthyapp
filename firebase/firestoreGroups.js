@@ -29,6 +29,7 @@ export const createGroup = async (groupName, createdByUser, members) => {
   };
 
   await setDoc(groupDoc, initialData);
+  console.log('made')
   return groupId;
 };
 

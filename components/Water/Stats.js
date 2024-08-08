@@ -6,7 +6,6 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import useAuth from "../../hooks/useAuth";
-import { getUserData, updateUserData } from "../../firebase/firestore";
 
 function Stats({ targetWaterLevel, currentWaterLevel, totalGlassesToday }) {
 

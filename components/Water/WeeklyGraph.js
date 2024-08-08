@@ -13,8 +13,9 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import { getWeeklyData } from "../../firebase/firestore"; // Make sure this path is correct
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+
 
 // Register the components
 Chart.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
@@ -33,10 +34,24 @@ const WeeklyGraph = () => {
 
   useEffect(() => {
     if (user) {
-      const fetchWeeklyData = async () => {
-        const data = await getWeeklyData(user.uid);
-        setWeeklyData(data.data);
-      };
+    async function fetchWeeklyData() {
+        try{
+            const userId = user.uid
+      const response = await axios.post(
+              `https://be-healthyapp-production.up.railway.app/water/getWeeklyData`,
+              {
+                userId,
+              }
+            );
+            const userWeeklyData = response.data.data
+            setWeeklyData(userWeeklyData)
+          }catch(err){
+            console.error(err)
+          }
+       
+    }
+
+
       fetchWeeklyData();
     }
   }, [user]);

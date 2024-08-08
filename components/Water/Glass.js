@@ -8,10 +8,8 @@ import styles from "./Glass.module.css";
 import useAuth from "../../hooks/useAuth";
 import Bottle from "./Bottle";
 import { Typography } from "@mui/material";
-import {
-  updateUserData,
-  updateWeeklyData,
-} from "../../firebase/firestore";
+
+import axios from "axios";
 
 const Glass = ({
   targetWaterLevel,
@@ -30,32 +28,49 @@ const Glass = ({
       setTargetWaterLevel(value * 1000);
 
       if (user) {
-        await updateUserData(user.uid, {
-          targetWaterLevel: value * 1000,
-          lastUpdated: new Date(),
-        });
+
+        try{
+          await axios.post(`https://be-healthyapp-production.up.railway.app/water/updateNewUserData`, {
+            userId: user.uid,
+            data: {
+              targetWaterLevel: value * 1000,
+              lastUpdated: new Date(),
+            },
+          });
+        }catch(err){
+          console.error(err)
+        }
       }
     }
   };
 
   const addGlassOfWater = async () => {
-    const newTotalGlasses = totalGlassesToday + 1;
-    const newCurrentWaterLevel = currentWaterLevel + glassOfWater;
-    const currentDay = new Date().toLocaleString("en-US", { weekday: "long" });
-    setCurrentWaterLevel(newCurrentWaterLevel);
-    setTotalGlassesToday(newTotalGlasses);
+    if (user) {
+      try {
+        const newTotalGlasses = totalGlassesToday + 1;
+        const newCurrentWaterLevel = currentWaterLevel + glassOfWater;
+        const currentDay = new Date().toLocaleString("en-US", {
+          weekday: "long",
+        });
 
-     if (user) {
-       await updateWeeklyData(user.uid, new Date(), currentDay, {
-         glassesDrunk: newTotalGlasses,
-         waterIntake: newCurrentWaterLevel,
-         targetWaterLevel: targetWaterLevel,
-       });
-       await updateUserData(user.uid, {
-         totalGlassesToday: newTotalGlasses,
-         lastUpdated: new Date(),
-       });
-     }
+        const userId = user.uid;
+        const response = await axios.post(
+          `https://be-healthyapp-production.up.railway.app/water/addGlassOfWater`,
+          {
+            userId,
+            newTotalGlasses,
+            newCurrentWaterLevel,
+            currentDay,
+            targetWaterLevel,
+          }
+        );
+        setCurrentWaterLevel(newCurrentWaterLevel);
+        setTotalGlassesToday(newTotalGlasses);
+        console.log(response.data.message);
+      } catch (err) {
+        console.error(err);
+      }
+    }
   };
 
   const resetAll = async () => {
@@ -64,11 +79,19 @@ const Glass = ({
     setTargetWaterLevel(3000.0);
 
     if (user) {
-      await updateUserData(user.uid, {
-        totalGlassesToday: 0,
-        targetWaterLevel: 3000.0,
-        lastUpdated: new Date(),
-      });
+      
+        try {
+          await axios.post(`https://be-healthyapp-production.up.railway.app/water/updateNewUserData`, {
+            userId: user.uid,
+            data: {
+              totalGlassesToday: 0,
+              targetWaterLevel: 3000.0,
+              lastUpdated: new Date(),
+            },
+          });
+        } catch (err) {
+          console.error(err);
+        }
     }
   };
 
@@ -107,7 +130,7 @@ const Glass = ({
           flexDirection="column"
           alignItems="center"
         >
-          <Box textAlign="center" mb={2} sx = {{padding: '15px'}}>
+          <Box textAlign="center" mb={2} sx={{ padding: "15px" }}>
             <p></p>
             <Typography
               sx={{
